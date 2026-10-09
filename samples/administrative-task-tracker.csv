@@ -1,0 +1,7 @@
+Task ID,Task,Category,Priority,Owner,Due Date,Status,Follow-up Date,Notes
+T-001,Prepare weekly status summary,Reporting,High,Edward,2026-03-06,In Progress,2026-03-05,Waiting on two updates
+T-002,Update vendor contact list,Records,Medium,Edward,2026-03-10,Not Started,2026-03-09,Verify emails first
+T-003,Schedule team meeting,Calendar,High,Edward,2026-03-04,Done,,Invite sent to all attendees
+T-004,File signed documents,Filing,Low,Edward,2026-03-12,Not Started,2026-03-11,Scan then rename
+T-005,Reply to open client queries,Email,High,Edward,2026-03-05,In Progress,2026-03-05,3 of 5 answered
+T-006,Archive Q1 folders,Filing,Low,Edward,2026-03-20,Not Started,2026-03-18,Follow naming convention

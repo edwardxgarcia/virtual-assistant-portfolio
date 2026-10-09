@@ -1,0 +1,6 @@
+Record ID,Document / Request,Type,Received,Handled By,Location,Status,Last Updated
+D-001,Signed service agreement,Contract,2026-02-10,Edward,/Contracts/2026,Filed,2026-02-11
+D-002,Equipment request form,Request,2026-02-12,Edward,/Requests/Open,In Review,2026-02-13
+D-003,Invoice 0245,Finance,2026-02-14,Edward,/Finance/Invoices,Filed,2026-02-14
+D-004,Onboarding checklist,HR,2026-02-17,Edward,/HR/Onboarding,Awaiting Signature,2026-02-18
+D-005,Meeting minutes Feb 20,Minutes,2026-02-20,Edward,/Meetings/2026,Filed,2026-02-20
