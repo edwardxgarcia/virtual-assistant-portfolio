@@ -15,7 +15,7 @@
   <a class="brand" href="#home">Edward Moncera</a>
   <button class="menu" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" aria-label="Main">
-    <a href="#about">About</a><a href="#services">Services</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#work">Work samples</a><a href="#packages">Packages</a><a href="#workflow">Workflow</a><a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#services">Services</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#apps">Apps I built</a><a href="#work">Work samples</a><a href="#packages">Packages</a><a href="#workflow">Workflow</a><a href="#contact">Contact</a>
   </nav>
 </header>
 <main id="main">
@@ -107,6 +107,12 @@
   <p>Bachelor of Science in Information Technology, STI College Las Piñas. Graduated August 2024.</p>
 </section>
 
+<section id="apps" class="wrap">
+  <h2>Apps I've built</h2>
+  <p class="sub">Real projects I designed and built with AI-assisted development (Claude as my main coding partner). Each one solves a problem I or my family actually had. Click a project to see screenshots and details.</p>
+  <div class="apps" id="appList"></div>
+</section>
+
 <section id="work" class="wrap">
   <h2>Work samples</h2>
   <p class="sub">These are demonstration projects I created for this portfolio. They use made-up data and are not client work.</p>
@@ -148,6 +154,15 @@
   <h4>Preview</h4>
   <div id="mPreview" class="preview"></div>
   <p><a id="mDownload" class="btn" download>Download sample file</a></p>
+</dialog>
+<dialog id="appModal" class="appmodal" aria-labelledby="aTitle">
+  <button class="close" aria-label="Close">Close</button>
+  <p class="tag" id="aStatus"></p>
+  <h3 id="aTitle"></h3>
+  <p id="aSummary" class="asum"></p>
+  <figure class="gallery"><img id="aImg" alt=""><figcaption id="aCap"></figcaption></figure>
+  <div class="thumbs" id="aThumbs"></div>
+  <div class="adetail" id="aBody"></div>
 </dialog>
 <div id="mailnote" class="mailnote" role="status" hidden>
   <p>Email app didn't open? Write to me at <strong id="mailaddr">edwardmoncera2026@gmail.com</strong></p>

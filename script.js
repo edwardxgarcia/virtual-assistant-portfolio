@@ -54,6 +54,128 @@ const menu=document.querySelector(".menu"),nav=$("#nav");
 menu.onclick=()=>{const o=nav.classList.toggle("open");menu.setAttribute("aria-expanded",o);};
 nav.addEventListener("click",e=>{if(e.target.tagName==="A"){nav.classList.remove("open");menu.setAttribute("aria-expanded",false);}});
 
+// Apps I've built. Screenshots live in assets/projects/.
+const APPS = [
+ {name:"Mama's Lending App", status:"Live, in daily use", live:true,
+  what:"A loan management web app for my mother's small lending business, used every day on her phone.",
+  points:["Tracks borrowers, loans, payment schedules, payments, expenses, and cash and GCash on hand",
+          "Works out installments, interest, and overdue charges automatically, so no more manual computing",
+          "Built from her real business rules, gathered by talking through worked examples with her"],
+  stack:["React","TypeScript","Supabase (PostgreSQL)","Cloudflare","Git & GitHub","PWA"],
+  shots:[["lending-home.webp","Home: money on hand (cash and GCash) and today's totals at a glance"],
+         ["lending-loans.webp","Loans still being paid, with the balance left and the next due date"],
+         ["lending-pay-grace.webp","Recording a payment: the app adds the overdue charge automatically when a payment is late"],
+         ["lending-loan-detail.webp","Loan details: amount, interest, total to repay, and what is still left to pay"],
+         ["lending-reports.webp","Reports: payments received, interest collected, loans given, and expenses for any period"],
+         ["lending-borrowers.webp","Borrower list with each person's payday schedule"],
+         ["lending-phone-home.webp","On a phone: it installs like an app (PWA)"],
+         ["lending-phone-pay-grace.webp","Recording a payment on a phone"]],
+  note:"Screenshots use made-up demo borrowers. No real customer data is shown.",
+  detail:[["The problem","My mother ran her lending business on paper and mental math. Working out installments, interest, and late charges took time and was easy to get wrong, and it was hard to know how much money was out at any moment."],
+   ["What it does",["Records borrowers, loans, and every payment, and keeps cash and GCash balances up to date",
+     "Creates the payment schedule automatically (1-month loan = 2 payments, 2-month loan = 4)",
+     "Computes overdue charges by days late, and applies each payment in the right order: overdue charge, then interest, then principal",
+     "Handles renewals (deducts the remaining balance from the new loan) and early or agreed full settlement",
+     "Shows today's and this month's totals, plus reports for any date range",
+     "Lets her fix a number or cancel a wrong entry, while keeping a history of every change",
+     "Encrypted backup and restore, and a sign-in so only approved people can see the records"]],
+   ["How I built it",["Gathered the business rules directly from my mother, confirming each one with real examples before building it",
+     "Made the rules she hadn't decided yet adjustable in the app, instead of guessing",
+     "Used a separate practice database with demo data, so every change is tested before it reaches the live records",
+     "Deployed it online on Cloudflare, with version control on GitHub, and wrote a simple printed user guide for her",
+     "Keep improving it based on what she asks for while using it day to day"]]]},
+ {name:"FROST", status:"In progress", live:false,
+  what:"A voice-controlled AI desktop assistant for Windows, inspired by JARVIS. It runs fully on my own PC, with no subscription.",
+  points:["Talk to it by voice (wake word) or text, and it answers out loud",
+          "Runs local AI models, including one that can understand images",
+          "Can control other apps, but always asks before anything risky"],
+  stack:["Electron","React","TypeScript","Python","Ollama (local AI)","faster-whisper","FFmpeg"],
+  shots:[["frost-dashboard.webp","Command Center view: the assistant, AI status, live system stats, and an activity log (conversation blurred for privacy)"],
+         ["frost-immersive.webp","Immersive mode: a full-screen animated orb that reacts while FROST listens and speaks"],
+         ["frost-permissions.webp","Permission settings: FROST asks before deleting, sending, buying, or acting on text it just read"],
+         ["frost-settings.webp","Appearance settings: modes, themes, colors, and effects"]],
+  detail:[["The idea","I wanted a personal assistant like JARVIS that I can talk to, that helps on my own computer, and that keeps everything private and free, with no cloud subscription."],
+   ["What it does",["Voice in and out: speech-to-text (Whisper), text-to-speech, and a “Frost” wake word for hands-free use",
+     "Local AI brain through Ollama (Qwen3 for chat, Qwen3-VL for images), set up to fit a 6 GB graphics card",
+     "Chat accepts images, documents, files, and video",
+     "Controls Windows apps: switching windows, typing, clicking, and reading window text",
+     "Several looks (Holographic, Minimal, Assistant, Command Center, Immersive) and a live system monitor"]],
+   ["Safety first",["Permission modes, from “Ask first” to “Full control (safe)”",
+     "Always asks before Delete, Send, Buy, or Pay, before typing into a terminal, and before acting right after reading a web page or window",
+     "Never types passwords, never bypasses Windows security prompts, and only deletes to the Recycle Bin",
+     "Esc or the Stop button cancels any action"]],
+   ["How I built it",["Planned and built in phases, with a Windows installer for each version (0.5 to 0.7.x)",
+     "Tested each release on my own PC before moving on",
+     "Next steps: video editing and background removal (FFmpeg), coding help in a safe folder, and website tasks"]]]},
+ {name:"LinkHub", status:"In progress", live:false,
+  what:"A desktop app that turns 1,800+ saved links into a searchable research library for job hunting and learning.",
+  points:["Imports links I saved in Facebook Messenger and removes duplicates",
+          "Sorts them into job opportunities, AI resources, learning, and more",
+          "Ranks job posts by how well they fit what I'm looking for"],
+  stack:["Electron","Node.js","JSON","Data cleanup"],
+  shots:[["linkhub-dashboard.webp","Dashboard: 1,854 links collected, duplicates removed, and best-fit job opportunities"],
+         ["linkhub-jobs.webp","Job Opportunities: ranked by fit, with pay, type, remote setup, and filters"]],
+  detail:[["The problem","For months I saved useful links (job posts, tutorials, tools) by sending them to myself on Messenger. There were well over a thousand, with no way to search or sort them."],
+   ["What it does",["Imports a Messenger chat export and pulls out every link (1,854 in my first import)",
+     "Removes duplicates and sorts links into collections: Job Opportunities, AI & Development, Video Editing, Learning, Tools, Business & Freelancing",
+     "Scores job posts by fit, shows pay, remote setup, and type, and can export the list to CSV",
+     "Flags links that need review, with favorites, archive, and trash",
+     "Saves everything locally on my PC"]]]},
+ {name:"CozySpace", status:"In progress", live:false,
+  what:"A calm personal productivity app for Windows: tasks, focus timer, notes, and projects in one place.",
+  points:["My Day view with a daily plan, Top 3 priorities, and progress",
+          "Focus timer (stopwatch or Pomodoro) that tracks time per task",
+          "Idle detection: time away from the PC is set aside, never added to a task without asking"],
+  stack:["Electron","Node.js","Git"],
+  shots:[["cozyspace-myday.webp","My Day: today's progress, focused time, waiting tasks, and Top 3"],
+         ["cozyspace-focus.webp","Focus: one task, one timer, with time logged automatically"]],
+  detail:[["Why I built it","I wanted one simple, calm place to plan my day and keep focus, built the way I actually work."],
+   ["What it does",["Tasks with priorities and due dates, plus list and calendar views",
+     "Focus timer with stopwatch and Pomodoro modes, and time insights",
+     "Detects when I step away and keeps that time as “unsorted” until I decide what it was",
+     "Notes and projects to group related tasks"]]]},
+ {name:"Claude Usage Monitor", status:"In progress", live:false,
+  what:"A Windows app with a floating widget that shows how much of my AI plan's usage limits are left, so I can plan my work.",
+  points:["Live session and weekly usage, with reset times",
+          "Estimates whether I'll run out before the reset",
+          "24-hour usage chart and simple recommendations"],
+  stack:["Windows desktop app","Data visualization"],
+  shots:[["usage-monitor.webp","Overview: session and weekly usage, reset times, 24-hour chart, and recommendations"]],
+  detail:[["Why I built it","I use Claude heavily for building apps, so I wanted to see at a glance how much usage I have left, without opening the website."],
+   ["What it does",["A small always-on-top widget showing usage left in the current session",
+     "A dashboard with weekly usage, reset times, pace estimates, history, and insights",
+     "Designed to support other AI tools like ChatGPT and Gemini later"]]]}
+];
+(function(){
+  const list=document.getElementById("appList"), dlg=document.getElementById("appModal");
+  if(!list) return;
+  const img=f=>"assets/projects/"+f;
+  list.innerHTML=APPS.map((a,i)=>`<article class="card app">
+    <figure class="shot" data-i="${i}"><img src="${img(a.shots[0][0])}" alt="${a.name}: ${a.shots[0][1]}" loading="lazy"></figure>
+    <div><p class="status${a.live?"":" wip"}">${a.status}</p><h3>${a.name}</h3><p class="what">${a.what}</p>
+    <ul>${a.points.map(p=>`<li>${p}</li>`).join("")}</ul>
+    <ul class="stack">${a.stack.map(t=>`<li>${t}</li>`).join("")}</ul>
+    <button class="btn ghost" data-i="${i}">See screenshots &amp; details (${a.shots.length})</button></div></article>`).join("");
+  let cur=null;
+  function show(k){const s=cur.shots[k];const im=document.getElementById("aImg");im.src=img(s[0]);im.alt=cur.name+": "+s[1];
+    document.getElementById("aCap").textContent=s[1];
+    document.querySelectorAll("#aThumbs button").forEach((b,j)=>b.setAttribute("aria-current",j===k));}
+  function open(i){cur=APPS[i];
+    document.getElementById("aStatus").textContent=cur.status;
+    document.getElementById("aTitle").textContent=cur.name;
+    document.getElementById("aSummary").textContent=cur.what+(cur.note?" "+cur.note:"");
+    document.getElementById("aThumbs").innerHTML=cur.shots.map((s,j)=>`<button type="button" data-k="${j}" aria-label="Screenshot ${j+1}: ${s[1]}"><img src="${img(s[0])}" alt=""></button>`).join("");
+    document.getElementById("aBody").innerHTML=cur.detail.map(([h,b])=>`<h4>${h}</h4>`+(Array.isArray(b)?`<ul>${b.map(x=>`<li>${x}</li>`).join("")}</ul>`:`<p>${b}</p>`)).join("")+
+      `<h4>Tools used</h4><ul class="stack">${cur.stack.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+    show(0); dlg.showModal(); dlg.scrollTop=0;}
+  list.addEventListener("click",e=>{const t=e.target.closest("[data-i]");if(t)open(+t.dataset.i);});
+  document.getElementById("aThumbs").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(b)show(+b.dataset.k);});
+  dlg.querySelector(".close").onclick=()=>dlg.close();
+  dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close();});
+  dlg.addEventListener("keydown",e=>{if(!cur)return;const k=[...document.querySelectorAll("#aThumbs button")].findIndex(b=>b.getAttribute("aria-current")==="true");
+    if(e.key==="ArrowRight")show((k+1)%cur.shots.length);if(e.key==="ArrowLeft")show((k-1+cur.shots.length)%cur.shots.length);});
+})();
+
 // Scroll effects: reveal on scroll, progress bar, active nav link, count-up numbers
 document.documentElement.classList.add("js");
 (function(){
