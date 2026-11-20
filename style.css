@@ -137,3 +137,9 @@ main section:not(.hero)>h2.in::after{width:64px}
 nav a[aria-current=true]{color:var(--tech)}
 @media (prefers-reduced-motion:reduce){.role::after,.dot{animation:none}}
 
+
+/* Technical backdrop: cool blueprint tint with a faint engineering grid */
+:root{--bg:#eef3f6;--sage:#dde9ec;--line:#cfdbe1;--card:#fbfdfe;--mute:#566470}
+body{background-color:var(--bg);background-image:linear-gradient(rgba(15,118,110,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(15,118,110,.07) 1px,transparent 1px),linear-gradient(rgba(34,52,77,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(34,52,77,.05) 1px,transparent 1px);background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-attachment:fixed}
+.hero::before{background-image:radial-gradient(#9fb6c0 1.2px,transparent 1.4px)}
+.wrap:nth-of-type(even) .card,.card{box-shadow:0 1px 0 rgba(34,52,77,.04),0 14px 28px -22px rgba(34,52,77,.35)}
