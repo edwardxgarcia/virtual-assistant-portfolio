@@ -229,3 +229,10 @@ document.documentElement.classList.add("js");
   };
   document.getElementById("closeNote").onclick=()=>box.hidden=true;
 })();
+
+// Scroll-linked effects: backdrop grid drift and the rotating ring around the photo.
+(function(){
+  const r=document.documentElement;
+  function s(){r.style.setProperty("--sy",scrollY);r.style.setProperty("--rot",(scrollY*0.35)%360+"deg");}
+  addEventListener("scroll",s,{passive:true});s();
+})();
