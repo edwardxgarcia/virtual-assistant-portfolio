@@ -202,3 +202,9 @@ body{background-color:var(--bg);background-image:linear-gradient(rgba(15,118,110
 .theme:hover{border-color:var(--acc);color:var(--acc)}
 .top .right{display:flex;align-items:center}
 @media (prefers-reduced-motion:reduce){:root:not([data-theme=light]) .hero .photo::after{animation:none;display:none}}
+
+/* Skills: technical chips and "Built with" row */
+.logos.built{margin-top:.4rem}
+#skills .cols h3+.sub{margin-bottom:1rem;font-size:.95rem}
+
+#skills .cols h3+.chips{margin-bottom:1.6rem}
