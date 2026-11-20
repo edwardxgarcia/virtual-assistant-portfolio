@@ -208,3 +208,21 @@ body{background-color:var(--bg);background-image:linear-gradient(rgba(15,118,110
 #skills .cols h3+.sub{margin-bottom:1rem;font-size:.95rem}
 
 #skills .cols h3+.chips{margin-bottom:1.6rem}
+
+/* ===== Performance pass: cheaper paints, composited layers, no per-scroll repaints ===== */
+body{background-attachment:scroll}
+:root:not([data-theme=light]) body{background-image:none}
+:root:not([data-theme=light])::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;will-change:transform;background-image:radial-gradient(900px 520px at 50% -8%,rgba(92,225,255,.16),transparent 70%),radial-gradient(700px 500px at 100% 40%,rgba(139,123,255,.10),transparent 70%),linear-gradient(rgba(92,225,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(92,225,255,.05) 1px,transparent 1px);background-size:auto,auto,56px 56px,56px 56px}
+:root:not([data-theme=light]) body::before{display:none}
+.glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:-1;will-change:transform;transform:translate3d(50vw,25vh,0);background:radial-gradient(circle,rgba(92,225,255,.11),transparent 65%)}
+:root[data-theme=light] .glow{display:none}
+:root:not([data-theme=light]) body::after{will-change:transform}
+:root:not([data-theme=light]) .card,:root:not([data-theme=light]) .hero .glance div,:root:not([data-theme=light]) .hero .glance div+div{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,22,40,.82)}
+:root:not([data-theme=light]) .top{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,10,20,.94)}
+:root:not([data-theme=light]) .hero h1{filter:none}
+:root:not([data-theme=light]) .hero .photo::after{mix-blend-mode:normal}
+.hero::before{background-position:0 0!important}
+.hero .photo{box-shadow:0 0 38px -4px rgba(92,225,255,.5),0 0 80px -10px rgba(139,123,255,.45);border-radius:14px}
+:root[data-theme=light] .hero .photo{box-shadow:0 18px 40px -22px rgba(20,30,50,.55)}
+.hero .photo::before{box-shadow:none!important;filter:none!important;will-change:transform}
+.card{will-change:auto}

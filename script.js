@@ -208,7 +208,7 @@ document.documentElement.classList.add("js");
   const bar=document.querySelector(".progress"),top=document.querySelector(".top");
   function onScroll(){const m=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?scrollY/m:0)+")";top.classList.toggle("scrolled",scrollY>10);
     const tl=document.querySelector(".timeline");if(tl){const r=tl.getBoundingClientRect();tl.style.setProperty("--p",Math.max(0,Math.min(1,(innerHeight*0.6-r.top)/r.height)));}}
-  addEventListener("scroll",onScroll,{passive:true});onScroll();
+  let tk=false;addEventListener("scroll",()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;onScroll();});},{passive:true});onScroll();
   const links=[...document.querySelectorAll("nav a")];
   const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.setAttribute("aria-current",a.getAttribute("href")==="#"+e.target.id));}),{rootMargin:"-45% 0px -50% 0px"});
   document.querySelectorAll("main section[id]").forEach(s=>so.observe(s));
@@ -230,11 +230,12 @@ document.documentElement.classList.add("js");
   document.getElementById("closeNote").onclick=()=>box.hidden=true;
 })();
 
-// Scroll-linked effects: backdrop grid drift and the rotating ring around the photo.
+// Scroll-linked photo ring: one element, one frame at a time, only while the hero is on screen.
 (function(){
-  const r=document.documentElement;
-  function s(){r.style.setProperty("--sy",scrollY);r.style.setProperty("--rot",(scrollY*0.35)%360+"deg");}
-  addEventListener("scroll",s,{passive:true});s();
+  const ph=document.getElementById("photo");if(!ph)return;
+  let tk=false;
+  function s(){tk=false;if(scrollY<1100)ph.style.setProperty("--rot",(scrollY*0.35)%360+"deg");}
+  addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(s);}},{passive:true});s();
 })();
 
 // Theme toggle (hologram dark by default, light optional) and cursor glow.
@@ -243,7 +244,9 @@ document.documentElement.classList.add("js");
   function label(){const light=root.getAttribute("data-theme")==="light";if(btn){btn.textContent=light?"Hologram mode":"Light mode";btn.setAttribute("aria-label",light?"Switch to hologram dark theme":"Switch to light theme");}}
   if(btn){btn.addEventListener("click",()=>{const next=root.getAttribute("data-theme")==="light"?"holo":"light";root.setAttribute("data-theme",next);try{localStorage.setItem("theme",next)}catch(e){}label();});}
   label();
-  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
-    addEventListener("pointermove",e=>{root.style.setProperty("--mx",e.clientX+"px");root.style.setProperty("--my",e.clientY+"px");},{passive:true});
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&matchMedia("(pointer:fine)").matches){
+    const g=document.createElement("div");g.className="glow";g.setAttribute("aria-hidden","true");document.body.appendChild(g);
+    let x=innerWidth/2,y=innerHeight/4,tk=false;
+    addEventListener("pointermove",e=>{x=e.clientX;y=e.clientY;if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;g.style.transform="translate3d("+x+"px,"+y+"px,0)";});}},{passive:true});
   }
 })();
