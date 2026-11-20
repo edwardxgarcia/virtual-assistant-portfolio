@@ -236,3 +236,14 @@ document.documentElement.classList.add("js");
   function s(){r.style.setProperty("--sy",scrollY);r.style.setProperty("--rot",(scrollY*0.35)%360+"deg");}
   addEventListener("scroll",s,{passive:true});s();
 })();
+
+// Theme toggle (hologram dark by default, light optional) and cursor glow.
+(function(){
+  const root=document.documentElement,btn=document.getElementById("themeBtn");
+  function label(){const light=root.getAttribute("data-theme")==="light";if(btn){btn.textContent=light?"Hologram mode":"Light mode";btn.setAttribute("aria-label",light?"Switch to hologram dark theme":"Switch to light theme");}}
+  if(btn){btn.addEventListener("click",()=>{const next=root.getAttribute("data-theme")==="light"?"holo":"light";root.setAttribute("data-theme",next);try{localStorage.setItem("theme",next)}catch(e){}label();});}
+  label();
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    addEventListener("pointermove",e=>{root.style.setProperty("--mx",e.clientX+"px");root.style.setProperty("--my",e.clientY+"px");},{passive:true});
+  }
+})();
